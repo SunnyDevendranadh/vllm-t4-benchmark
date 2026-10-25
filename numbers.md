@@ -20,4 +20,10 @@ Notes:
 
 ## Prediction
 
-_TODO (Sunny): write the T4 1.5B decode ceiling math in your own words, plus the H100 ceiling._
+Decode ceiling for a 1.5B model in FP16, one user (batch 1):
+
+- Model size = 1.5B params x 2 bytes = ~3 GB. Each new token reads all of it once.
+- **T4:** 320 GB/s / 3 GB = **~107 tok/s** ceiling.
+- **H100 SXM:** 3,350 GB/s / 3 GB = **~1,117 tok/s** ceiling.
+
+Decode is memory-bound: speed is capped by bandwidth, not compute. Real runs will land below these ceilings. Measuring the gap is the point of P0.
