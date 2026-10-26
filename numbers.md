@@ -26,9 +26,14 @@ Decode ceiling for a 1.5B model in FP16, one user (batch 1):
 - **T4:** 320 GB/s / 3 GB = **~107 tok/s** ceiling.
 - **H100 SXM:** 3,350 GB/s / 3 GB = **~1,117 tok/s** ceiling.
 
-Measured Qwen/Qwen2.5-1.5B-Instruct at 45 tok/s
-Median TOPT : 22.2 ms
-TTFT : 142 ms
-c = 1,512 in/ 128 out
+## Measured (Day 3, Oct 26, 2026)
+
+Qwen/Qwen2.5-1.5B-Instruct on a Colab T4, vLLM 0.32.0, `--dtype half`:
+
+- **Measured:** ~45 tok/s (1000 / median TPOT)
+- **Median TPOT:** 22.2 ms
+- **Median TTFT:** 142 ms
+- **Setup:** c = 1, 512 in / 128 out, 20 prompts
+- **vs ceiling:** ~45 / ~107 = ~42% of the T4 bandwidth ceiling
 
 Decode is memory-bound: speed is capped by bandwidth, not compute. Real runs will land below these ceilings. Measuring the gap is the point of P0.
