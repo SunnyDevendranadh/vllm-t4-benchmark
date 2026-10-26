@@ -26,4 +26,9 @@ Decode ceiling for a 1.5B model in FP16, one user (batch 1):
 - **T4:** 320 GB/s / 3 GB = **~107 tok/s** ceiling.
 - **H100 SXM:** 3,350 GB/s / 3 GB = **~1,117 tok/s** ceiling.
 
+Measured Qwen/Qwen2.5-1.5B-Instruct at 45 tok/s
+Median TOPT : 22.2 ms
+TTFT : 142 ms
+c = 1,512 in/ 128 out
+
 Decode is memory-bound: speed is capped by bandwidth, not compute. Real runs will land below these ceilings. Measuring the gap is the point of P0.
